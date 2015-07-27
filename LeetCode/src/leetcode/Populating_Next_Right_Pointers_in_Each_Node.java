@@ -17,30 +17,36 @@ public class Populating_Next_Right_Pointers_in_Each_Node {
     public static void connect(TreeLinkNode root) {
         if (root == null)
             return;
-        Queue<TreeLinkNode> queue = new ArrayDeque<TreeLinkNode>();
-        queue.add(root);
+        TreeLinkNode lastHead = root;
         TreeLinkNode pre = null;
-        int cur = 0, last = 1;
-        while (!queue.isEmpty()){
-            TreeLinkNode temp = queue.poll();
-            last--;
-            if (pre != null){
-                pre.next = temp;
+        TreeLinkNode curHead = null;
+        while (lastHead != null){
+            TreeLinkNode lastCur = lastHead;
+            while (lastCur != null){
+                if (lastCur.left != null){
+                    if (curHead == null){
+                        curHead = lastCur.left;
+                        pre = curHead;
+                    }
+                    else{
+                        pre.next = lastCur.left;
+                        pre = lastCur.left;
+                    }
+                }
+                if (lastCur.right != null){
+                    if (curHead == null){
+                        curHead = lastCur.right;
+                        pre = curHead;
+                    }
+                    else{
+                        pre.next = lastCur.right;
+                        pre = lastCur.right;
+                    }
+                }
+                lastCur = lastCur.next;
             }
-            pre = temp;
-            if (temp.left != null){
-                queue.add(temp.left);
-                cur++;
-            }
-            if (temp.right != null){
-                queue.add(temp.right);
-                cur++;
-            }
-            if (last == 0){
-                last = cur;
-                cur = 0;
-                pre = null;
-            }
+            lastHead = curHead;
+            curHead = null;
         }
     }
     
