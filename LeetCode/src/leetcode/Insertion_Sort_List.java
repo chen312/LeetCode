@@ -10,7 +10,6 @@ public class Insertion_Sort_List {
         ListNode end = head;
         ListNode cur = head.next;
         while (cur != null){
-            //System.out.println("cur:" + cur.val + " end:" + end.val);
             if (cur.val >= end.val){
                 end = cur;
                 cur = cur.next;
@@ -21,7 +20,6 @@ public class Insertion_Sort_List {
                 if (cur.val < head.val){
                     cur.next = head;
                     head = cur;
-                    cur = next;
                 }
                 else{
                     ListNode temp = head;
@@ -30,8 +28,8 @@ public class Insertion_Sort_List {
                     }
                     cur.next = temp.next;
                     temp.next = cur;
-                    cur = next;
                 }
+                cur = next;
             }
         }
         return head;
