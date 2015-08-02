@@ -8,22 +8,22 @@ public class Find_Minimum_in_Rotated_Sorted_Array {
         if (nums.length == 1)
             return nums[0];
         int l = 0, r = nums.length-1;
-        while (l <= r){
-            if (l == r)
-                return nums[l];
+        int min = nums[0];
+        while (l < r-1){
             int m = (l+r) / 2;
-            if (nums[m] > nums[l] && nums[r] > nums[m])
-                return nums[l];
-            if (nums[m] == nums[l])
-                return Math.min(nums[l], nums[r]);
-            else if (nums[m] > nums[l]){
-                l = m;
+            if (nums[l] < nums[m]){
+                min = Math.min(min, nums[l]);
+                l = m+1;
             }
-            else {
-                r = m;
+            else if (nums[l] > nums[m]){
+                min = Math.min(min, nums[m]);
+                r = m-1;
+            }
+            else{
+                l++;
             }
         }
-        return nums[0];
+        return Math.min(Math.min(min, nums[l]), nums[r]);
     }
     
     public static void main(String[] args) {
