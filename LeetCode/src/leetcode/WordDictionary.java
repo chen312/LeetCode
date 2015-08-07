@@ -31,32 +31,7 @@ public class WordDictionary {
     // Returns if the word is in the data structure. A word could
     // contain the dot character '.' to represent any one letter.
     public boolean search(String word) {
-        if (word.length() == 0)
-            return false;
-        
-        TrieNode node = root;
-        for (int i = 0; i < word.length(); i++){
-            if (word.charAt(i) != '.'){
-                int pos = word.charAt(i) - 'a';
-                if (node.child[pos] == null)
-                    return false;
-                node = node.child[pos];
-            }
-            else{
-                boolean result = false;
-                for (int j = 0; j < 26; j++){
-                    if (node.child[j] != null){
-                        result |= helper(node.child[j], word.substring(i+1));
-                        System.out.println(j);
-                    }
-                }
-                return result;
-            }
-        }
-        if (node.isEnd)
-            return true;
-        else
-            return false;
+        return helper(root, word);
     }
     
     public boolean helper(TrieNode root, String word){
