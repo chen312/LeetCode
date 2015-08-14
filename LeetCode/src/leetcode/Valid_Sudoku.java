@@ -40,8 +40,8 @@ public class Valid_Sudoku {
                 set.clear();
                 for (int i = row; i < row+3; i++){
                     for (int j = col; j < col+3; j++){
-                        if (Character.isDigit(board[i][col])){
-                            int cur = board[i][col] - '0';
+                        if (Character.isDigit(board[i][j])){
+                            int cur = board[i][j] - '0';
                             if (set.contains(cur))
                                 return false;
                             else
